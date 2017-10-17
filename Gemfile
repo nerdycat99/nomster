@@ -53,6 +53,7 @@ gem 'popper_js', '~> 1.11.1'
 gem 'bootstrap', '4.0.0.alpha6'
 gem 'kaminari', '~> 1.1.0'
 gem 'simple_form', '~> 3.5.0'
+gem "font-awesome-rails", '~> 4.7.0'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
