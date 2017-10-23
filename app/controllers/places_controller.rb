@@ -1,6 +1,5 @@
 class PlacesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update :destroy]
-
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 def index
   @places = Place.page(params[:page]).per(5)
   # @places = Place.all
@@ -11,8 +10,12 @@ def new
 end
 
 def create
-  current_user.places.create(place_params)
-  redirect_to root_path
+  @place = current_user.places.create(place_params)
+  if @place.valid?
+    redirect_to root_path
+  else
+    render :new, status: :unprocessable_entity
+  end
 end
 
 def show
@@ -34,7 +37,11 @@ def update
   end
 
   @place.update_attributes(place_params)
-  redirect_to root_path
+  if @place.valid?
+    redirect_to root_path
+  else
+    render :edit, status: :unprocessable_entity
+  end
 end
 
 def destroy # called by the Delete button
