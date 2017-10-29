@@ -40,13 +40,16 @@
       <%=link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure about this?'},class: 'btn btn-danger' %>
     <% end %>
   </div> 
+
   <br/>
-</div>
+  <div class='clear'></div>
+</div> <!-- End of booyah box-->
+
 <div class='clear'></div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal for comment-->
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -70,17 +73,78 @@
 </div>
 
 
+<!-- Modal for photo-->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Upload a photo</h4>
+      </div>
+      <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+        <div class="modal-body">
+          <%= f.input :caption %>
+          <%= f.input :picture, multiple: true %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Upload Photo", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
 <div class="col-10 offset-1">
-  <h1 class="float-left">Comments</h1>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
+  <!-- Add Comment Button trigger modal -->
+  <button type="button" class="btn btn-primary btn float-right" data-toggle="modal" data-target="#commentModal">
     Add a comment
+  </button>
+
+  <!-- Upload Photo Button trigger modal -->
+  <button type="button" class="btn btn-primary btn float-left" data-toggle="modal" data-target="#photoModal">
+    Upload a photo
   </button>
 </div>
 
 <div class='clear'></div>
+<br/>
 
-<div class="row">
+<div class="col-10 offset-1">
+  <h1 class="float-left">Pictures</h1>
+</div>
+
+<div class='clear'></div>
+
+  <!-- Show photos that have been uploaded for a place, if any exist-->
+   <div class="col-10 offset-1">
+    <% @place.photos.each do |photo| %>
+      <% if photo.caption.present? %>
+        <div class="stitched">
+          <%= image_tag photo.picture %>         
+          <br/>
+          <%= photo.caption %>
+        </div>
+      <% end %>
+    <% end %>
+  </div> 
+
+
+<div class='clear'></div>
+<br/>
+
+<div class="col-10 offset-1">
+  <h1 class="float-left">Comments</h1>
+</div>
+
+<div class='clear'></div>
+
+<div class="row col-10 offset-1">
   <% @place.comments.each do |comment| %>
     <div class="col-12 col-sm-6">
       <blockquote>

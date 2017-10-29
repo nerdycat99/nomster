@@ -57,6 +57,9 @@ gem "font-awesome-rails", '~> 4.7.0'
 gem 'devise', '~> 4.0.0'
 gem 'geocoder', '~>1.4.4'
 gem 'figaro', '~>1.1.1'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+gem 'fog-aws'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
