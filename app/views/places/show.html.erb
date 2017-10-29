@@ -124,11 +124,13 @@
   <!-- Show photos that have been uploaded for a place, if any exist-->
    <div class="col-10 offset-1">
     <% @place.photos.each do |photo| %>
-      <% if photo.caption.present? %>
+      <% if photo.picture.present? %>
         <div class="stitched">
           <%= image_tag photo.picture %>         
           <br/>
           <%= photo.caption %>
+          <br/>
+          <small>uploaded by <%= photo.user.email %></small>
         </div>
       <% end %>
     <% end %>
@@ -152,6 +154,7 @@
           <b><%= comment.humanised_rating %></b> -
         <% end %>
           <%= comment.message %>
+         <br/> 
         <small><%= comment.user.email %></small>
       </blockquote>
     </div> 

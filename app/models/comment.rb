@@ -15,4 +15,7 @@ def humanised_rating
   RATINGS.invert[self.rating]
 end
 
+validates :message, presence: true
+validates :rating, presence: true
+
 end
