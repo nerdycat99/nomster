@@ -1,6 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :place
+  after_create :send_comment_email
 
     RATINGS = {
     'one star': '1_star',
@@ -17,5 +18,9 @@ end
 
 validates :message, presence: true
 validates :rating, presence: true
+
+def send_comment_email
+  NotificationMailer.comment_added(self).deliver
+end
 
 end
