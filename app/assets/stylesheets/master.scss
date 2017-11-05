@@ -122,8 +122,9 @@ blockquote p {
 }
 
 .img-resize {
-  max-width: 20px;
-  max-height: 20px;
+  max-width: 200px;
+  max-height: 200px;
+  display: block;
 }
 
 .carousel-inner > .carousel-item > img, .carousel-inner > .carousel-item > a > img {
